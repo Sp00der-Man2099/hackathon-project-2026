@@ -4,8 +4,8 @@
     "name": "Drink water before coffee",
     "cue": "Start the day gently",
     "schedule": "Morning",
-    "completedToday": false,
-    "streak": 3
+    "completedToday": true,
+    "streak": 4
   },
   {
     "id": "starter-walk",
