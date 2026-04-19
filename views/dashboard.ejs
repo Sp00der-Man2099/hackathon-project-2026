@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drift | Your Routine</title>
+    <script>
+        (() => {
+            const savedTheme = localStorage.getItem("drift-theme");
+            const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            const theme = savedTheme || (systemPrefersDark ? "dark" : "light");
+            document.documentElement.setAttribute("data-theme", theme);
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="page-shell dashboard-shell">
+        <header class="site-header">
+            <a href="/" class="brand">Drift</a>
+            <div class="header-controls">
+                <nav class="site-nav" aria-label="Primary">
+                    <a href="/">Home</a>
+                    <a href="#today">Today</a>
+                    <a href="#new-habit">Add habit</a>
+                </nav>
+                <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch color theme">
+                    <span class="theme-toggle-label">Dark mode</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="dashboard-layout">
+            <section class="dashboard-hero">
+                <div>
+                    <p class="eyebrow">Your daily rhythm</p>
+                    <h1>Keep showing up in small, steady ways.</h1>
+                    <p class="hero-text">
+                        A simple dashboard for the few habits you want to keep close. Check in, make a small
+                        adjustment, and come back tomorrow.
+                    </p>
+                </div>
+
+                <div class="stats-grid" aria-label="Habit summary">
+                    <article class="stat-card">
+                        <p class="section-label">Completed today</p>
+                        <h2><%= stats.completedCount %>/<%= stats.totalCount %></h2>
+                        <p>Small wins already in motion.</p>
+                    </article>
+                    <article class="stat-card">
+                        <p class="section-label">Pending</p>
+                        <h2><%= stats.pendingCount %></h2>
+                        <p>Keep the rest light and doable.</p>
+                    </article>
+                    <article class="stat-card">
+                        <p class="section-label">Completion</p>
+                        <h2><%= stats.completionRate %>%</h2>
+                        <p>Consistency matters more than perfect days.</p>
+                    </article>
+                    <article class="stat-card">
+                        <p class="section-label">Combined streak</p>
+                        <h2><%= stats.totalStreak %></h2>
+                        <p>Total days of momentum across your habits.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="dashboard-grid">
+                <section class="panel panel-main" id="today">
+                    <div class="panel-heading">
+                        <div>
+                            <p class="section-label">Today</p>
+                            <h2>Your habits</h2>
+                        </div>
+                        <p class="panel-copy">Tap a habit when you complete it. No pressure, just a gentle reset.</p>
+                    </div>
+
+                    <div class="dashboard-habits">
+                        <% habits.forEach((habit) => { %>
+                            <article class="dashboard-habit <%= habit.completedToday ? 'dashboard-habit-complete' : '' %>">
+                                <div class="dashboard-habit-copy">
+                                    <p class="habit-title"><%= habit.name %></p>
+                                    <p class="dashboard-note"><%= habit.cue %></p>
+                                    <div class="habit-meta">
+                                        <span><%= habit.schedule %></span>
+                                        <span><%= habit.streak %> day streak</span>
+                                    </div>
+                                </div>
+
+                                <div class="habit-actions">
+                                    <form action="/habits/<%= habit.id %>/toggle" method="POST">
+                                        <button type="submit" class="button <%= habit.completedToday ? 'button-secondary' : 'button-primary' %>">
+                                            <%= habit.completedToday ? 'Mark as pending' : 'Mark complete' %>
+                                        </button>
+                                    </form>
+
+                                    <form action="/habits/<%= habit.id %>/delete" method="POST">
+                                        <button type="submit" class="button button-ghost-danger">Delete</button>
+                                    </form>
+                                </div>
+                            </article>
+                        <% }) %>
+                    </div>
+                </section>
+
+                <aside class="panel panel-side" id="new-habit">
+                    <div class="panel-heading">
+                        <div>
+                            <p class="section-label">New habit</p>
+                            <h2>Add a gentle routine</h2>
+                        </div>
+                    </div>
+
+                    <form action="/habits" method="POST" class="habit-form">
+                        <label class="form-field">
+                            <span>Habit name</span>
+                            <input type="text" name="name" placeholder="Read 5 pages" required>
+                        </label>
+
+                        <label class="form-field">
+                            <span>Helpful cue</span>
+                            <input type="text" name="cue" placeholder="Right after dinner">
+                        </label>
+
+                        <label class="form-field">
+                            <span>Time of day</span>
+                            <input type="text" name="schedule" placeholder="Evening">
+                        </label>
+
+                        <button type="submit" class="button button-primary form-button">Add habit</button>
+                    </form>
+
+                    <div class="mini-note">
+                        <p class="section-label">A steady approach</p>
+                        <p>Try keeping this list to three or four habits so it stays easy to revisit every day.</p>
+                    </div>
+                </aside>
+            </section>
+        </main>
+    </div>
+    <script src="/js/theme-toggle.js"></script>
+</body>
+</html>

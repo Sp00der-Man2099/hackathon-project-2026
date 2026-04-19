@@ -1,0 +1,26 @@
+[
+  {
+    "id": "starter-water",
+    "name": "Drink water before coffee",
+    "cue": "Start the day gently",
+    "schedule": "Morning",
+    "completedToday": false,
+    "streak": 3
+  },
+  {
+    "id": "starter-walk",
+    "name": "10 minute walk",
+    "cue": "Reset after lunch",
+    "schedule": "Afternoon",
+    "completedToday": false,
+    "streak": 2
+  },
+  {
+    "id": "starter-journal",
+    "name": "Write one line in a journal",
+    "cue": "Close the day with reflection",
+    "schedule": "Evening",
+    "completedToday": false,
+    "streak": 6
+  }
+]

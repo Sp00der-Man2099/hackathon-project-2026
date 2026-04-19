@@ -3,10 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hacathon Project</title>
+    <title>Drift | Gentle Habit Building</title>
+    <script>
+        (() => {
+            const savedTheme = localStorage.getItem("drift-theme");
+            const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            const theme = savedTheme || (systemPrefersDark ? "dark" : "light");
+            document.documentElement.setAttribute("data-theme", theme);
+        })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <h1> Lets Start Coding!</h1>
+    <div class="page-shell">
+        <header class="site-header">
+            <a href="/" class="brand">Drift</a>
+            <div class="header-controls">
+                <nav class="site-nav" aria-label="Primary">
+                    <a href="#features">Why it works</a>
+                    <a href="#rhythm">Daily rhythm</a>
+                    <a href="#support">Support</a>
+                    <a href="/dashboard">Dashboard</a>
+                </nav>
+                <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch color theme">
+                    <span class="theme-toggle-label">Dark mode</span>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <section class="hero">
+                <div class="hero-copy">
+                    <p class="eyebrow">Small routines. Real momentum.</p>
+                    <h1>Build habits that fit quietly into everyday life.</h1>
+                    <p class="hero-text">
+                        Drift helps you stay consistent with a few meaningful habits at a time.
+                        No streak pressure, no crowded dashboards, just a calm space to return to each day.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="/dashboard" class="button button-primary">Open your routine</a>
+                        <a href="#features" class="button button-secondary">See how it feels</a>
+                    </div>
+                </div>
+
+                <div class="hero-card" aria-label="Habit preview">
+                    <div class="hero-card-top">
+                        <p>Today&rsquo;s rhythm</p>
+                        <span>3 gentle wins</span>
+                    </div>
+
+                    <div class="habit-list">
+                        <article class="habit-item habit-item-complete">
+                            <div>
+                                <p class="habit-title">Drink water before coffee</p>
+                                <p class="habit-note">A soft start for the morning</p>
+                            </div>
+                            <span class="habit-status">Done</span>
+                        </article>
+
+                        <article class="habit-item">
+                            <div>
+                                <p class="habit-title">10 minute walk</p>
+                                <p class="habit-note">Move a little after lunch</p>
+                            </div>
+                            <span class="habit-status">Next</span>
+                        </article>
+
+                        <article class="habit-item">
+                            <div>
+                                <p class="habit-title">Write one line in journal</p>
+                                <p class="habit-note">End the day with reflection</p>
+                            </div>
+                            <span class="habit-status">Later</span>
+                        </article>
+                    </div>
+
+                    <div class="progress-panel">
+                        <div>
+                            <p class="progress-label">This week</p>
+                            <p class="progress-value">5 calm check-ins</p>
+                        </div>
+                        <div class="progress-dots" aria-hidden="true">
+                            <span class="dot dot-filled"></span>
+                            <span class="dot dot-filled"></span>
+                            <span class="dot dot-filled"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="feature-strip" id="features">
+                <article>
+                    <p class="feature-kicker">Focused</p>
+                    <h2>Track only the habits that matter right now.</h2>
+                </article>
+                <article>
+                    <p class="feature-kicker">Encouraging</p>
+                    <h2>Designed to support consistency without guilt.</h2>
+                </article>
+                <article>
+                    <p class="feature-kicker">Lightweight</p>
+                    <h2>Quick daily check-ins that never feel like homework.</h2>
+                </article>
+            </section>
+
+            <section class="details-grid" id="rhythm">
+                <article class="detail-card detail-card-large">
+                    <p class="section-label">Daily rhythm</p>
+                    <h3>Less planning. More returning.</h3>
+                    <p>
+                        Build a tiny routine you can actually keep. Drift is made for small actions that
+                        repeat gently over time, helping momentum grow without adding pressure.
+                    </p>
+                </article>
+
+                <article class="detail-card">
+                    <p class="section-label">A calmer interface</p>
+                    <h3>Minimal by design</h3>
+                    <p>Clear lists, soft progress, and no noisy productivity mechanics competing for attention.</p>
+                </article>
+
+                <article class="detail-card">
+                    <p class="section-label">Steady progress</p>
+                    <h3>Consistency over perfection</h3>
+                    <p>Celebrate showing up often, not doing everything flawlessly every single day.</p>
+                </article>
+            </section>
+
+            <section class="support-section" id="support">
+                <div>
+                    <p class="section-label">Supportive by default</p>
+                    <h2>A habit tool that feels like a quiet companion.</h2>
+                </div>
+                <a href="/dashboard" class="button button-primary">Create your first routine</a>
+            </section>
+        </main>
+    </div>
+    <script src="/js/theme-toggle.js"></script>
 </body>
 </html>
